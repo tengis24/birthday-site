@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Again 😈</title>
+
+<style>
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #ff99cc, #ff4d6d);
+    font-family: Arial;
+    text-align: center;
+    color: white;
+}
+
+.gif-box {
+    width: 220px;
+    margin: 20px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 15px;
+}
+
+button {
+    background: #ff4d6d;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yesButton {
+    transform: scale(1);
+}
+
+/* hide all */
+#newGif, #no2, #no3, #yes3Gif {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="title">😏 одоо зугтахгүй ядарчлоо 🥺 цааш нь жоохон сонирхолдоо бас тэй no дээр дардагч юм уу 🤭</h1>
+
+<!-- 🥺 MAIN -->
+<div class="gif-box" id="mainGif">
+    <div class="tenor-gif-embed" data-postid="9647046979984591269"></div>
+</div>
+
+<!-- 😏 NEW -->
+<div class="gif-box" id="newGif">
+    <div class="tenor-gif-embed" data-postid="13860510"></div>
+</div>
+
+<!-- 😣 -->
+<div class="gif-box" id="no2">
+    <div class="tenor-gif-embed"
+         data-postid="5883714320658611738"
+         data-aspect-ratio="1"
+         data-width="100%">
+    </div>
+</div>
+
+<!-- 🥺 -->
+<div class="gif-box" id="no3">
+    <div class="tenor-gif-embed" data-postid="9647046979984591269"></div>
+</div>
+
+<!-- 😱 YES 3rd -->
+<div class="gif-box" id="yes3Gif">
+    <div class="tenor-gif-embed" data-postid="10951351072973650606"></div>
+</div>
+
+<div class="btn-group">
+    <button id="yesButton">Yes 💖</button>
+    <button id="noButton">No 😢</button>
+</div>
+
+<script async src="https://tenor.com/embed.js"></script>
+
+<script>
+let scale = 1;
+let noCount = 0;
+let yesCount = 0;
+
+const yesBtn = document.getElementById("yesButton");
+const noBtn = document.getElementById("noButton");
+const title = document.getElementById("title");
+
+// YES LOGIC
+yesBtn.onclick = () => {
+    yesCount++;
+
+    // эхний 2 даралт → томорно
+    if (yesCount <= 2) {
+        scale += 0.4;
+        yesBtn.style.transform = "scale(" + scale + ")";
+    }
+
+    // 3 дахь → 😱 GIF
+    else if (yesCount === 3) {
+        title.innerText = "Аая яах гээд байгаан 😳";
+
+        document.getElementById("mainGif").style.display = "none";
+        document.getElementById("newGif").style.display = "none";
+        document.getElementById("no2").style.display = "none";
+        document.getElementById("no3").style.display = "none";
+
+        document.getElementById("newGif").style.display = "block";
+    }
+
+    // 4 дахь → next page
+    else {
+        window.location.href = "finalPage.html";
+    }
+};
+
+// NO LOGIC
+noBtn.onclick = () => {
+    noCount++;
+
+    // бүгдийг hide
+    document.getElementById("mainGif").style.display = "none";
+    document.getElementById("newGif").style.display = "none";
+    document.getElementById("no2").style.display = "none";
+    document.getElementById("no3").style.display = "none";
+    document.getElementById("yes3Gif").style.display = "none";
+
+    // 🔥 ЭХНИЙ NO
+    if (noCount === 1) {
+        title.innerText = "Хэхэ no дарж байгаад баригдлаа 😏 одоо yes дарчих аа";
+        document.getElementById("newGif").style.display = "block";
+    }
+
+    // 😣
+    else if (noCount === 2) {
+        title.innerText = "Намайг битгий ингэлдээ 😣";
+        document.getElementById("no2").style.display = "block";
+    }
+
+    // 🥺
+    else {
+        title.innerText = "За YES дарчих аа 🥺 гуйж байна...no дарж болохгүй ээ";
+        document.getElementById("no3").style.display = "block";
+    }
+};
+</script>
+
+</body>
+</html>

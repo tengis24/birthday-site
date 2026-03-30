@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎉</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #ff99cc, #ff4d6d);
+    font-family: Arial;
+    color: white;
+    text-align: center;
+}
+
+/* 💖 BACKGROUND TEXT */
+.bg-text {
+    position: absolute;
+    font-size: 80px;
+    color: rgba(255,255,255,0.08);
+    font-weight: bold;
+    letter-spacing: 10px;
+    z-index: 0;
+    user-select: none;
+    animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float {
+    50% { transform: translateY(-20px); }
+}
+
+/* 🎉 MAIN TEXT */
+h1 {
+    font-size: 30px;
+    z-index: 2;
+    animation: pop 1s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+/* 🌈 CONFETTI */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    opacity: 0.8;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* 💥 BURST */
+.burst {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    from {
+        transform: translate(0,0);
+        opacity: 1;
+    }
+    to {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 💖 Background -->
+<div class="bg-text">ANUDARI</div>
+
+<!-- 🎉 Main message -->
+<h1>
+🎉 Төрсөн өдрийн мэнд хүргэе 💖 <br><br>😄
+✨ ӨДӨР БҮР ИНЭЭЖ ЯВААРАЙ ✨ 😄 <br>
+Always stay cute 😄
+</h1>
+
+<script>
+// 🌈 confetti
+setInterval(() => {
+    const c = document.createElement("div");
+    c.className = "confetti";
+
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.top = "-10px";
+    c.style.background = `hsl(${Math.random()*360},100%,70%)`;
+    c.style.animationDuration = (Math.random()*3+2) + "s";
+
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+}, 150);
+
+// 💥 burst function
+function burst(side) {
+    for (let i = 0; i < 25; i++) {
+        const b = document.createElement("div");
+        b.className = "burst";
+
+        b.style.left = side === "left" ? "0px" : "100%";
+        b.style.top = (window.innerHeight / 2) + "px";
+        b.style.background = `hsl(${Math.random()*360},100%,60%)`;
+
+        const x = (Math.random()*300 + 100) * (side === "left" ? 1 : -1);
+        const y = (Math.random()*300 - 150);
+
+        b.style.setProperty('--x', x + 'px');
+        b.style.setProperty('--y', y + 'px');
+
+        document.body.appendChild(b);
+        setTimeout(() => b.remove(), 1000);
+    }
+}
+
+// эхлэхэд буудна
+burst("left");
+burst("right");
+</script>
+
+</body>
+</html>

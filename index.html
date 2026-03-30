@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catch me 😈</title>
+
+<style>
+body {
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom, #ffc0cb, #ff99cc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: Arial;
+}
+
+h1 {
+    position: absolute;
+    top: 20px;
+    color: white;
+}
+
+#gifBox, #secondGif {
+    position: absolute;
+    width: 200px;
+    cursor: pointer;
+}
+
+#secondGif {
+    display: none;
+}
+
+#finalGif {
+    display: none;
+    width: 220px;
+}
+
+#yesButton {
+    display: none;
+    position: absolute;
+    bottom: 100px;
+    background: #ff4d6d;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="title">Сайн уу намайг бариж авч чадах уу?</h1>
+
+<!-- 1-р GIF -->
+<div id="gifBox">
+    <div class="tenor-gif-embed"
+         data-postid="13605920082808775290"
+         data-width="100%">
+    </div>
+</div>
+
+<!-- 🏃 2-р GIF -->
+<div id="secondGif">
+    <div class="tenor-gif-embed"
+         data-postid="25840732"
+         data-width="100%">
+    </div>
+</div>
+
+<!-- 💖 FINAL -->
+<div id="finalGif">
+    <div class="tenor-gif-embed"
+         data-postid="7805868341248877957"
+         data-width="100%">
+    </div>
+</div>
+
+<button id="yesButton">Yes 💖</button>
+
+<script async src="https://tenor.com/embed.js"></script>
+
+<script>
+const gif = document.getElementById("gifBox");
+const secondGif = document.getElementById("secondGif");
+const finalGif = document.getElementById("finalGif");
+const title = document.getElementById("title");
+const yesBtn = document.getElementById("yesButton");
+
+let moveCount = 0;
+let activeGif = gif;
+
+// эхний байрлал
+gif.style.left = "40%";
+gif.style.top = "40%";
+
+// зугтах функц
+function move(el) {
+    const maxX = window.innerWidth - 200;
+    const maxY = window.innerHeight - 200;
+
+    el.style.left = Math.random() * maxX + "px";
+    el.style.top = Math.random() * maxY + "px";
+}
+
+// эхний GIF
+gif.addEventListener("mouseover", () => {
+    if (moveCount >= 3) return;
+
+    move(gif);
+    moveCount++;
+
+    if (moveCount === 1) {
+        title.innerText = "Nope 😜";
+    }
+
+    if (moveCount === 2) {
+        title.innerText = "Still no 😏";
+
+        // 2 дахь GIF activate
+        secondGif.style.display = "block";
+        secondGif.style.left = gif.style.left;
+        secondGif.style.top = gif.style.top;
+
+        gif.style.display = "none";
+        activeGif = secondGif;
+    }
+});
+
+// 2 дахь GIF
+secondGif.addEventListener("mouseover", () => {
+    if (moveCount >= 3) return;
+
+    move(secondGif);
+    moveCount++;
+
+    if (moveCount === 3) {
+        title.innerText = "За за болно яамар аймар юм бэ 😄 дахиад зугтаж чадахгүй болхоор yes дээр дарчих өө ";
+
+        secondGif.style.display = "none";
+        finalGif.style.display = "block";
+        yesBtn.style.display = "block";
+    }
+});
+
+// YES → next page
+yesBtn.onclick = () => {
+    window.location.href = "nextPage.html";
+};
+</script>
+
+</body>
+</html>
